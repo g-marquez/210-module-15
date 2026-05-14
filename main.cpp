@@ -7,15 +7,13 @@
 #include <iostream>
 using namespace std;
 
+int sum_ascii(const string&);
 
 int main() {
-    char a = 'A';
-    cout << a << endl;
-    cout << (int) a << endl;
-    int b = 66;
-    cout << b << endl;
-    cout << (char) b << endl;
-    
+    string str = "bob";
+    int sum = sum_ascii(str);
+
+    cout << "The sum of the values in " << str << " is " << sum;    
 
     return 0;
 }
@@ -27,3 +25,15 @@ These targets are present in the dataset and can be used for testing:
 666D109AA22E
 E1D2665B21EA
 */
+
+//description: sum_ascii() receives a single string and returns the sum of that
+// string's character's ASCII values
+//arguments: a string passed by constant reference
+//returns: an int representng the sum of the string's character's ASCII values
+int sum_ascii(const string &str) {
+    int count = 0;
+    for (auto &s : str) {
+        count += (int) s;
+    }
+    return count;
+}
