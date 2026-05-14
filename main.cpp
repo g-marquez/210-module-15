@@ -5,15 +5,35 @@
 //*****************************************************************************
 
 #include <iostream>
+#include <string>
+#include <fstream>
 using namespace std;
 
 int sum_ascii(const string&);
+
+const string FILE_NAME = "lab-37-data.txt";
 
 int main() {
     string str = "bob";
     int sum = sum_ascii(str);
 
-    cout << "The sum of the values in " << str << " is " << sum;    
+    cout << "The sum of the values in " << str << " is " << sum << endl;
+    
+    int total = 0;
+    string input;
+    ifstream fin(FILE_NAME);
+    if (fin.good( )) {
+        while (fin >> input) {
+            total += sum_ascii(input);
+        }
+        fin.close( );
+    }
+    else {
+        cout << "ERROR! Please verify file name/directory and restart program.";
+        return 1;
+    }
+
+    cout << "Grand total of all ASCII values in the entire file: " << total;
 
     return 0;
 }
