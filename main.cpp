@@ -27,7 +27,8 @@ int main() {
     if (fin.good( )) {
         while (fin >> input) {
             index = gen_hash_index(input);
-
+            //add index & string to hash table
+            hash_table[index].push_back(input);
         }
         fin.close( );
     }
