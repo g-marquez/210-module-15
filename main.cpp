@@ -41,12 +41,14 @@ int main() {
     int count = 0;
     for (auto &pair : hash_table) {
         cout << count << " Hash index: " << pair.first << endl;
+        cout << "\t";
         for (string &code : pair.second) {
-            cout << "\t" << code << " ";
+            cout << code << " ";
+            count++;
+            if (count >= 100)
+                break;
         }
-        count++;
-        if (count >= 100)
-            break;
+        cout << endl;
     }
 
     return 0;
