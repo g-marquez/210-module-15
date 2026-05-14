@@ -37,6 +37,11 @@ int main() {
         return 1;
     }
 
+    //output first 100 map entries
+    for (int i = 0; i < 100; i++) {
+        
+    }
+
     return 0;
 }
 
