@@ -40,7 +40,7 @@ int main() {
     //output first 100 map entries
     int count = 0;
     for (auto &pair : hash_table) {
-        cout << count << " Hash index: " << pair.first << endl;
+        cout << "Hash index: " << pair.first << endl;
         cout << "\t";
         for (string &code : pair.second) {
             cout << code << " ";
