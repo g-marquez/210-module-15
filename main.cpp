@@ -7,24 +7,27 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <map>
+#include <list>
 using namespace std;
 
-int sum_ascii(const string&);
+int gen_hash_index(const string&);
 
 const string FILE_NAME = "lab-37-data.txt";
 
 int main() {
-    string str = "bob";
-    int sum = sum_ascii(str);
+    //declare hash table
+    //key = int, the hash index
+    //value = list<string>, the hexadecimal strings from lab-37-data.txt
+    map<int, list<string>> hash_table;
 
-    cout << "The sum of the values in " << str << " is " << sum << endl;
-    
-    int total = 0;
+    int index = 0;
     string input;
     ifstream fin(FILE_NAME);
     if (fin.good( )) {
         while (fin >> input) {
-            total += sum_ascii(input);
+            index = gen_hash_index(input);
+
         }
         fin.close( );
     }
@@ -32,8 +35,6 @@ int main() {
         cout << "ERROR! Please verify file name/directory and restart program.";
         return 1;
     }
-
-    cout << "Grand total of all ASCII values in the entire file: " << total;
 
     return 0;
 }
@@ -46,11 +47,11 @@ These targets are present in the dataset and can be used for testing:
 E1D2665B21EA
 */
 
-//description: sum_ascii() receives a single string and returns the sum of that
-// string's character's ASCII values
+//description: gen_hash_index() receives a string and returns the sum of that
+// string's character's ASCII values, used as a hash index for a hash table
 //arguments: a string passed by constant reference
 //returns: an int representng the sum of the string's character's ASCII values
-int sum_ascii(const string &str) {
+int gen_hash_index(const string &str) {
     int count = 0;
     for (auto &s : str) {
         count += (int) s;
