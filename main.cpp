@@ -45,7 +45,7 @@ int main() {
         for (string &code : pair.second) {
             cout << code << " ";
             count++;
-            if (count >= 100)
+            if (count >= 300)
                 break;
         }
         cout << endl;
