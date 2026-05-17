@@ -98,7 +98,7 @@ int main_menu() {
          << "3. Add Key" << endl
          << "4. Remove Key" << endl
          << "5. Modify Key" << endl
-         << "6. Exit" << endl;
+         << "6. Exit" << endl; //exit already here
     cout << "Choice --> ";
     cin >> choice;
     //check if input string is anything except for numbers 1-6
@@ -242,7 +242,7 @@ void modify_key(map<int, list<string>> &ht) {
         bool result = key_check(ht, mod);
         if (result) {
             cout << mod << " already exists." << endl;
-            cout << "Please try again by select option 5." << endl << endl;
+            cout << "Please try again by selecting option 5." << endl << endl;
         }
         else { //remove entry and add mod if mod does not exist
             //first remove old key
