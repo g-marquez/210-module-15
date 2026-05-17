@@ -13,7 +13,7 @@ using namespace std;
 
 int gen_hash_index(const string&);
 int main_menu();
-void add_key(map<int, list<string>> &);
+void print_entries(const map<int, list<string>> &);
 
 const string FILE_NAME = "lab-37-data.txt";
 
@@ -39,7 +39,21 @@ int main() {
         return 1;
     }
 
-    
+    //display main menu for program
+    int choice = main_menu();
+    while (choice != 6) {
+        //input vaidated in main_menu() function
+        switch (choice) {
+            case 1: print_entries(hash_table); break;
+            //will get updated with each milestone
+            case 2: continue; break;
+            case 3: continue; break;
+            case 4: continue; break;
+            case 5: continue; break;
+        }
+        choice = main_menu();
+    }
+    cout << "Goodbye" << endl;
 
     return 0;
 }
@@ -81,7 +95,7 @@ int main_menu() {
          << "6. Exit" << endl;
     cout << "Choice --> ";
     cin >> choice;
-    //check if input string is anything except for numbers 1-5
+    //check if input string is anything except for numbers 1-6
     while (choice != "1" && choice != "2" && choice != "3" && 
            choice != "4" && choice != "5" && choice != "6") {
         cout << "Invalid choice, try again --> ";
@@ -91,13 +105,18 @@ int main_menu() {
     return stoi(choice);
 }
 
-void add_key(map<int, list<string>> &hash_table) {
+//description: print_entries() prints the first 100 entries/300 strings
+// to the console
+//arguments: a hash table implemented with an int for the key and a std::list
+// of strings for its value, passed by constant reference
+//returns: void
+void print_entries(const map<int, list<string>> &hash_table) {
     //output first 100 map entries/first 300 strings
     int count = 0;
-    for (auto &pair : hash_table) {
+    for (const auto &pair : hash_table) {
         cout << "Hash index: " << pair.first << endl;
         cout << "\t";
-        for (string &code : pair.second) {
+        for (const string &code : pair.second) {
             cout << code << " ";
             count++;
             if (count >= 300)
