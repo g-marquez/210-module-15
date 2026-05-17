@@ -46,10 +46,10 @@ int main() {
         switch (choice) {
             case 1: print_entries(hash_table); break;
             //will get updated with each milestone
-            case 2: continue; break;
-            case 3: continue; break;
-            case 4: continue; break;
-            case 5: continue; break;
+            case 2: break;
+            case 3: break;
+            case 4: break;
+            case 5: break;
         }
         choice = main_menu();
     }
@@ -91,7 +91,7 @@ int main_menu() {
          << "2. Search for Key" << endl
          << "3. Add Key" << endl
          << "4. Remove Key" << endl
-         << "5. Modify Record" << endl
+         << "5. Modify Key" << endl
          << "6. Exit" << endl;
     cout << "Choice --> ";
     cin >> choice;
@@ -122,6 +122,6 @@ void print_entries(const map<int, list<string>> &hash_table) {
             if (count >= 300)
                 break;
         }
-        cout << endl;
+        cout << endl << endl;
     }
 }
