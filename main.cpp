@@ -182,25 +182,13 @@ void add_key(map<int, list<string>> &ht) {
     cin >> entry;
 
     //check if key already exists
-    //get hash index of user entry and see if it exists using .find()
-    int index = gen_hash_index(entry);
-    auto it = ht.find(index);
-
-    //if hash index exists, traverse its list to search for the key
-    bool result = false; //default to false
-    if (it != ht.end()) {
-        for (auto &key : it->second) {
-            if (key == entry) { //if key found, result true
-                result = true;
-                break;
-            }
-        }
-    }
+    bool result = key_check(ht, entry);
     if (result) {
         cout << entry << " already exists." << endl;
         cout << "To modify existing key, select option 5." << endl << endl;
     }
     else { //add key if it doesn't already exist
+        int index = gen_hash_index(entry);
         ht[index].push_back(entry);
         cout << entry << " added!" << endl << endl;
     }
@@ -216,18 +204,15 @@ void remove_key(map<int, list<string>> &ht) {
     cin >> entry;
 
     //check if key exists
-    //get hash index of user entry and see if it exists using .find()
-    int index = gen_hash_index(entry);
-    auto it = ht.find(index);
-
-    //if hash index exists, traverse its list to search for the key
-    bool result = false; //default to false
-    if (it != ht.end()) {
-        for (auto &key : it->second) {
-            if (key == entry) { //if key found, result true
-                result = true;
-                break;
-            }
-        }
+    bool result = key_check(ht, entry);
+    if (result) { //remove key if found
+        int index = gen_hash_index(entry);
+        auto it = ht.find(index);
+        ht.at(index).erase(it);
+        cout << "To modify existing key, select option 5." << endl << endl;
+    }
+    else { //else no changes made
+        cout << entry << " not found!" << endl;
+        cout << "No changes made." << endl << endl;
     }
 }
