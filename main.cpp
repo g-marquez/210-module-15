@@ -14,6 +14,7 @@ using namespace std;
 int gen_hash_index(const string&);
 int main_menu();
 void print_entries(const map<int, list<string>> &);
+bool search_key(const map<int, list<string>> &);
 
 const string FILE_NAME = "lab-37-data.txt";
 
@@ -124,4 +125,16 @@ void print_entries(const map<int, list<string>> &hash_table) {
         }
         cout << endl << endl;
     }
+}
+
+//description: search_key() checks if a key exists in the passed hash table
+//arguments: a hash table passed by constant reference
+//returns: true or false, depending on if the key was found or not
+bool search_key(const map<int, list<string>> &ht) {
+    cout << "Please enter a key to search for:" << endl;
+    cout << "--> ";
+    string entry;
+    cin >> entry;
+    cout << "Searching for " << entry << "..." << endl;
+
 }
