@@ -9,6 +9,7 @@
 #include <fstream>
 #include <map>
 #include <list>
+#include <algorithm> //for .find()
 using namespace std;
 
 int gen_hash_index(const string&);
@@ -207,9 +208,8 @@ void remove_key(map<int, list<string>> &ht) {
     bool result = key_check(ht, entry);
     if (result) { //remove key if found
         int index = gen_hash_index(entry);
-        auto it = ht.find(index);
-        ht.at(index).erase(it);
-        cout << "To modify existing key, select option 5." << endl << endl;
+        erase(ht.at(index), entry);
+        cout << entry << " removed!" << endl << endl;
     }
     else { //else no changes made
         cout << entry << " not found!" << endl;
