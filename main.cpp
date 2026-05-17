@@ -55,7 +55,7 @@ int main() {
             case 2: search_key(hash_table); break;
             case 3: add_key(hash_table); break;
             case 4: remove_key(hash_table); break;
-            case 5: break;
+            case 5: modify_key(hash_table); break;
         }
         choice = main_menu();
     }
@@ -231,11 +231,7 @@ void modify_key(map<int, list<string>> &ht) {
 
     //check if key exists
     bool result = key_check(ht, entry);
-    if (result) { //modify key if found
-        //first remove old key
-        int index = gen_hash_index(entry);
-        auto it = find(ht.at(index).begin(), ht.at(index).end(), entry);
-        ht.at(index).erase(it); //no need to check for .end() since already found
+    if (result) { //modify entry if found
         //new modification
         cout << "Please enter the modification:" << endl;
         cout << "--> ";
@@ -249,9 +245,15 @@ void modify_key(map<int, list<string>> &ht) {
             cout << "Please try again by select option 5." << endl << endl;
         }
         else { //remove entry and add mod if mod does not exist
+            //first remove old key
             int index = gen_hash_index(entry);
-            ht[index].push_back(entry);
-            cout << entry << " added!" << endl << endl;
+            auto it = find(ht.at(index).begin(), ht.at(index).end(), entry);
+            ht.at(index).erase(it); //no need to check for .end() since already found
+
+            //now safe to add mod
+            int mod_index = gen_hash_index(mod);
+            ht[mod_index].push_back(mod);
+            cout << entry << " successfully modified to " << mod << endl << endl;
         }
     }
     else { //else no changes made
