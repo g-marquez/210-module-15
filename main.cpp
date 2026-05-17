@@ -15,6 +15,7 @@ int gen_hash_index(const string&);
 int main_menu();
 void print_entries(const map<int, list<string>> &);
 void search_key(const map<int, list<string>> &);
+void add_key(map<int, list<string>> &);
 
 const string FILE_NAME = "lab-37-data.txt";
 
@@ -48,7 +49,7 @@ int main() {
             case 1: print_entries(hash_table); break;
             //will get updated with each milestone
             case 2: search_key(hash_table); break;
-            case 3: break;
+            case 3: add_key(hash_table); break;
             case 4: break;
             case 5: break;
         }
@@ -157,4 +158,37 @@ void search_key(const map<int, list<string>> &ht) {
         cout << " found!" << endl << endl;
     else
         cout << " not found!" << endl << endl;
+}
+
+//description: add_key() adds a key to the passed hash table
+//arguments: a hash table passed by reference
+//returns: void
+void add_key(map<int, list<string>> &ht) {
+    cout << "Please enter a key to add:" << endl;
+    cout << "--> ";
+    string entry;
+    cin >> entry;
+
+    //check if key already exists
+    //get hash index of user entry and see if it exists using .find()
+    int index = gen_hash_index(entry);
+    auto it = ht.find(index);
+
+    //if hash index exists, traverse its list to search for the key
+    bool result = false; //default to false
+    if (it != ht.end()) {
+        for (auto &key : it->second) {
+            if (key == entry) { //if key found, result true
+                result = true;
+                break;
+            }
+        }
+    }
+    if (result) {
+        cout << "Key already exists." << endl;
+        cout << "To modify existing key, select option 5." << endl << endl;
+    }
+    else { //add key if it doesn't already exist
+        
+    }
 }
