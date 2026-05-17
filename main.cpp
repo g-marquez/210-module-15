@@ -1,5 +1,5 @@
 //*****************************************************************************
-// COMSC-210 | Lab 37 | Gabriel Marquez
+// COMSC-210 | Lab 38 | Gabriel Marquez
 // Description: this program progressively creates a hash table using a std::map
 // and std::list
 //*****************************************************************************
