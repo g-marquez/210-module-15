@@ -42,12 +42,18 @@ int main() {
 
     //display main menu for program
     int choice = main_menu();
+    bool result;
     while (choice != 6) {
         //input vaidated in main_menu() function
         switch (choice) {
             case 1: print_entries(hash_table); break;
             //will get updated with each milestone
-            case 2: break;
+            case 2: result = search_key(hash_table);
+                    if (result)
+                        cout << "Key found!" << endl << endl;
+                    else
+                        cout << "Key not found!" << endl << endl;
+                    break;
             case 3: break;
             case 4: break;
             case 5: break;
@@ -140,15 +146,17 @@ bool search_key(const map<int, list<string>> &ht) {
     //get hash index of user entry and see if it exists using .find()
     int index = gen_hash_index(entry);
     auto it = ht.find(index);
+
+    //if hash index exists, traverse its list to search for the key
     if (it != ht.end()) {
         for (auto &key : it->second) {
-            if (key == entry)
+            if (key == entry) //if key found, return true
                 return true;
             else
                 continue;
         }
-        return false;
+        return false; //return false if end of list is reached (key not found)
     }
     else
-        return false;
+        return false; //return false if iterator is at .end()
 }
