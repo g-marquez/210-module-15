@@ -137,4 +137,7 @@ bool search_key(const map<int, list<string>> &ht) {
     cin >> entry;
     cout << "Searching for " << entry << "..." << endl;
 
+    //get hash index of user entry
+    int index = gen_hash_index(entry);
+    for (auto &i : ht[index])
 }
