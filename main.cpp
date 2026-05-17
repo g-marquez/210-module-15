@@ -185,10 +185,11 @@ void add_key(map<int, list<string>> &ht) {
         }
     }
     if (result) {
-        cout << "Key already exists." << endl;
+        cout << entry << " already exists." << endl;
         cout << "To modify existing key, select option 5." << endl << endl;
     }
     else { //add key if it doesn't already exist
-        
+        ht[index].push_back(entry);
+        cout << entry << " added!" << endl << endl;
     }
 }
