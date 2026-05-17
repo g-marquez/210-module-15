@@ -13,9 +13,11 @@ using namespace std;
 
 int gen_hash_index(const string&);
 int main_menu();
+bool key_check(const map<int, list<string>> &, string);
 void print_entries(const map<int, list<string>> &);
 void search_key(const map<int, list<string>> &);
 void add_key(map<int, list<string>> &);
+void remove_key(map<int, list<string>> &);
 
 const string FILE_NAME = "lab-37-data.txt";
 
@@ -50,7 +52,7 @@ int main() {
             //will get updated with each milestone
             case 2: search_key(hash_table); break;
             case 3: add_key(hash_table); break;
-            case 4: break;
+            case 4: remove_key(hash_table); break;
             case 5: break;
         }
         choice = main_menu();
@@ -105,6 +107,23 @@ int main_menu() {
     }
     //convert to int and return if input is valid
     return stoi(choice);
+}
+
+bool key_check(const map<int, list<string>> &ht, string entry) {
+    //get hash index of user entry and see if it exists using .find()
+    int index = gen_hash_index(entry);
+    auto it = ht.find(index);
+
+    //if hash index exists, traverse its list to search for the key
+    bool result = false; //default to false
+    if (it != ht.end()) {
+        for (auto &key : it->second) {
+            if (key == entry) { //if key found, result true
+                result = true;
+                break;
+            }
+        }
+    }
 }
 
 //description: print_entries() prints the first 100 entries/300 strings
@@ -191,5 +210,31 @@ void add_key(map<int, list<string>> &ht) {
     else { //add key if it doesn't already exist
         ht[index].push_back(entry);
         cout << entry << " added!" << endl << endl;
+    }
+}
+
+//description: remove_key() deletes a key from the passed hash table
+//arguments: a hash table passed by reference
+//returns: void
+void remove_key(map<int, list<string>> &ht) {
+    cout << "Please enter a key to remove:" << endl;
+    cout << "--> ";
+    string entry;
+    cin >> entry;
+
+    //check if key exists
+    //get hash index of user entry and see if it exists using .find()
+    int index = gen_hash_index(entry);
+    auto it = ht.find(index);
+
+    //if hash index exists, traverse its list to search for the key
+    bool result = false; //default to false
+    if (it != ht.end()) {
+        for (auto &key : it->second) {
+            if (key == entry) { //if key found, result true
+                result = true;
+                break;
+            }
+        }
     }
 }
