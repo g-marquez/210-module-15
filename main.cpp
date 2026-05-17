@@ -9,7 +9,7 @@
 #include <fstream>
 #include <map>
 #include <list>
-#include <algorithm> //for .find()
+#include <algorithm> //for find() (line 211)
 using namespace std;
 
 int gen_hash_index(const string&);
@@ -206,13 +206,14 @@ void remove_key(map<int, list<string>> &ht) {
 
     //check if key exists
     bool result = key_check(ht, entry);
-    if (result) { //remove key if found
+    if (result) { //erase key if found
         int index = gen_hash_index(entry);
-        erase(ht.at(index), entry);
+        auto it = find(ht.at(index).begin(), ht.at(index).end(), entry);
+        ht.at(index).erase(it); //no need to check for .end() since already found
         cout << entry << " removed!" << endl << endl;
     }
     else { //else no changes made
-        cout << entry << " not found!" << endl;
+        cout << entry << " not found." << endl;
         cout << "No changes made." << endl << endl;
     }
 }
