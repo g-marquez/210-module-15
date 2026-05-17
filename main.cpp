@@ -12,6 +12,8 @@
 using namespace std;
 
 int gen_hash_index(const string&);
+int main_menu();
+void add_key(map<int, list<string>> &);
 
 const string FILE_NAME = "lab-37-data.txt";
 
@@ -37,19 +39,7 @@ int main() {
         return 1;
     }
 
-    //output first 100 map entries
-    int count = 0;
-    for (auto &pair : hash_table) {
-        cout << "Hash index: " << pair.first << endl;
-        cout << "\t";
-        for (string &code : pair.second) {
-            cout << code << " ";
-            count++;
-            if (count >= 300)
-                break;
-        }
-        cout << endl;
-    }
+    
 
     return 0;
 }
@@ -72,4 +62,47 @@ int gen_hash_index(const string &str) {
         count += (int) s;
     }
     return count;
+}
+
+//description: main_menu() displays the menu options that give the user options
+// of what do do in the program
+//arguments: N/A
+//returns: an integer used as the user's choice for what operation to perform
+int main_menu() {
+    //read choice as a string, then convert to help with input validation
+    string choice;
+    cout << "Hash Table Main Menu" << endl
+         << "====================" << endl;
+    cout << "1. Print First 100 Entries/300 Strings" << endl
+         << "2. Search for Key" << endl
+         << "3. Add Key" << endl
+         << "4. Remove Key" << endl
+         << "5. Modify Record" << endl
+         << "6. Exit" << endl;
+    cout << "Choice --> ";
+    cin >> choice;
+    //check if input string is anything except for numbers 1-5
+    while (choice != "1" && choice != "2" && choice != "3" && 
+           choice != "4" && choice != "5" && choice != "6") {
+        cout << "Invalid choice, try again --> ";
+        cin >> choice;
+    }
+    //convert to int and return if input is valid
+    return stoi(choice);
+}
+
+void add_key(map<int, list<string>> &hash_table) {
+    //output first 100 map entries/first 300 strings
+    int count = 0;
+    for (auto &pair : hash_table) {
+        cout << "Hash index: " << pair.first << endl;
+        cout << "\t";
+        for (string &code : pair.second) {
+            cout << code << " ";
+            count++;
+            if (count >= 300)
+                break;
+        }
+        cout << endl;
+    }
 }
