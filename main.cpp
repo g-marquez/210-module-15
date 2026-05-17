@@ -236,7 +236,23 @@ void modify_key(map<int, list<string>> &ht) {
         int index = gen_hash_index(entry);
         auto it = find(ht.at(index).begin(), ht.at(index).end(), entry);
         ht.at(index).erase(it); //no need to check for .end() since already found
-        //then add new modification
+        //new modification
+        cout << "Please enter the modification:" << endl;
+        cout << "--> ";
+        string mod;
+        cin >> mod;
+
+        //check if mod already exists before removing anything
+        bool result = key_check(ht, mod);
+        if (result) {
+            cout << mod << " already exists." << endl;
+            cout << "Please try again by select option 5." << endl << endl;
+        }
+        else { //remove entry and add mod if mod does not exist
+            int index = gen_hash_index(entry);
+            ht[index].push_back(entry);
+            cout << entry << " added!" << endl << endl;
+        }
     }
     else { //else no changes made
         cout << entry << " not found." << endl;
