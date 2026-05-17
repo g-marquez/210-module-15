@@ -109,6 +109,10 @@ int main_menu() {
     return stoi(choice);
 }
 
+//description: key_check() checks if an entry exists in the passed hash table
+//arguments: a hash table passed by constant reference, a string
+//returns: true or false, depending on if the key was found or not
+//note: created to not copy/paste same logic in multiple functions
 bool key_check(const map<int, list<string>> &ht, string entry) {
     //get hash index of user entry and see if it exists using .find()
     int index = gen_hash_index(entry);
@@ -120,10 +124,12 @@ bool key_check(const map<int, list<string>> &ht, string entry) {
         for (auto &key : it->second) {
             if (key == entry) { //if key found, result true
                 result = true;
-                break;
+                return result;
             }
         }
+        return result; //result stays false if end of list is reached
     }
+    return result; //result stays false if iterator reaches .end()
 }
 
 //description: print_entries() prints the first 100 entries/300 strings
@@ -156,21 +162,8 @@ void search_key(const map<int, list<string>> &ht) {
     string entry;
     cin >> entry;
     cout << "Searching for " << entry << "..." << endl;
+    bool result = key_check(ht, entry);
 
-    //get hash index of user entry and see if it exists using .find()
-    int index = gen_hash_index(entry);
-    auto it = ht.find(index);
-
-    //if hash index exists, traverse its list to search for the key
-    bool result = false; //default to false
-    if (it != ht.end()) {
-        for (auto &key : it->second) {
-            if (key == entry) { //if key found, result true
-                result = true;
-                break;
-            }
-        }
-    }
     //output result
     cout << entry;
     if (result)
