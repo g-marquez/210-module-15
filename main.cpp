@@ -14,7 +14,7 @@ using namespace std;
 int gen_hash_index(const string&);
 int main_menu();
 void print_entries(const map<int, list<string>> &);
-bool search_key(const map<int, list<string>> &);
+void search_key(const map<int, list<string>> &);
 
 const string FILE_NAME = "lab-37-data.txt";
 
@@ -42,15 +42,12 @@ int main() {
 
     //display main menu for program
     int choice = main_menu();
-    string result;
     while (choice != 6) {
         //input vaidated in main_menu() function
         switch (choice) {
             case 1: print_entries(hash_table); break;
             //will get updated with each milestone
-            case 2: result = (search_key(hash_table)) ?
-                                  "Key found!" : "Key not found!";
-                    cout << result << endl << endl; break;
+            case 2: search_key(hash_table); break;
             case 3: break;
             case 4: break;
             case 5: break;
@@ -132,8 +129,8 @@ void print_entries(const map<int, list<string>> &hash_table) {
 
 //description: search_key() checks if a key exists in the passed hash table
 //arguments: a hash table passed by constant reference
-//returns: true or false, depending on if the key was found or not
-bool search_key(const map<int, list<string>> &ht) {
+//returns: void
+void search_key(const map<int, list<string>> &ht) {
     cout << "Please enter a key to search for:" << endl;
     cout << "--> ";
     string entry;
@@ -145,15 +142,20 @@ bool search_key(const map<int, list<string>> &ht) {
     auto it = ht.find(index);
 
     //if hash index exists, traverse its list to search for the key
+    bool result;
     if (it != ht.end()) {
         for (auto &key : it->second) {
-            if (key == entry) //if key found, return true
-                return true;
+            if (key == entry) //if key found, result true
+                result = true;
             else
                 continue;
         }
-        return false; //return false if end of list is reached (key not found)
+        result = false; //result false if end of list is reached (key not found)
     }
     else
-        return false; //return false if iterator is at .end()
+        result = false; //result false if iterator is at .end()
+
+    //output result
+    cout << entry;
+    if (result)
 }
