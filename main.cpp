@@ -137,7 +137,18 @@ bool search_key(const map<int, list<string>> &ht) {
     cin >> entry;
     cout << "Searching for " << entry << "..." << endl;
 
-    //get hash index of user entry
+    //get hash index of user entry and see if it exists using .find()
     int index = gen_hash_index(entry);
-    for (auto &i : ht[index])
+    auto it = ht.find(index);
+    if (it != ht.end()) {
+        for (auto &key : it->second) {
+            if (key == entry)
+                return true;
+            else
+                continue;
+        }
+        return false;
+    }
+    else
+        return false;
 }
