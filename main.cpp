@@ -142,7 +142,7 @@ void search_key(const map<int, list<string>> &ht) {
     auto it = ht.find(index);
 
     //if hash index exists, traverse its list to search for the key
-    bool result = false;
+    bool result = false; //default to false
     if (it != ht.end()) {
         for (auto &key : it->second) {
             if (key == entry) { //if key found, result true
@@ -151,7 +151,6 @@ void search_key(const map<int, list<string>> &ht) {
             }
         }
     }
-
     //output result
     cout << entry;
     if (result)
