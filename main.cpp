@@ -19,6 +19,7 @@ void print_entries(const map<int, list<string>> &);
 void search_key(const map<int, list<string>> &);
 void add_key(map<int, list<string>> &);
 void remove_key(map<int, list<string>> &);
+void modify_key(map<int, list<string>> &);
 
 const string FILE_NAME = "lab-37-data.txt";
 
@@ -211,6 +212,31 @@ void remove_key(map<int, list<string>> &ht) {
         auto it = find(ht.at(index).begin(), ht.at(index).end(), entry);
         ht.at(index).erase(it); //no need to check for .end() since already found
         cout << entry << " removed!" << endl << endl;
+    }
+    else { //else no changes made
+        cout << entry << " not found." << endl;
+        cout << "No changes made." << endl << endl;
+    }
+}
+
+//description: modify_key() removes a key entered by the user (if found) and
+// inserts the modified version into the passed hash table
+//arguments: a hash table passed by reference
+//returns: void
+void modify_key(map<int, list<string>> &ht) {
+    cout << "Please enter a key to modify:" << endl;
+    cout << "--> ";
+    string entry;
+    cin >> entry;
+
+    //check if key exists
+    bool result = key_check(ht, entry);
+    if (result) { //modify key if found
+        //first remove old key
+        int index = gen_hash_index(entry);
+        auto it = find(ht.at(index).begin(), ht.at(index).end(), entry);
+        ht.at(index).erase(it); //no need to check for .end() since already found
+        //then add new modification
     }
     else { //else no changes made
         cout << entry << " not found." << endl;
