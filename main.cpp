@@ -42,18 +42,15 @@ int main() {
 
     //display main menu for program
     int choice = main_menu();
-    bool result;
+    string result;
     while (choice != 6) {
         //input vaidated in main_menu() function
         switch (choice) {
             case 1: print_entries(hash_table); break;
             //will get updated with each milestone
-            case 2: result = search_key(hash_table);
-                    if (result)
-                        cout << "Key found!" << endl << endl;
-                    else
-                        cout << "Key not found!" << endl << endl;
-                    break;
+            case 2: result = (search_key(hash_table)) ?
+                                  "Key found!" : "Key not found!";
+                    cout << result << endl << endl; break;
             case 3: break;
             case 4: break;
             case 5: break;
